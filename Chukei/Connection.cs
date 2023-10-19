@@ -33,4 +33,5 @@ public class IPv6Connection : IConnection
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static int GetSize() => 16;
+
 }
