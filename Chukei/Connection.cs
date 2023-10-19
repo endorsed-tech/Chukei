@@ -1,8 +1,10 @@
 ﻿using System.Runtime.CompilerServices;
 
+namespace Chukei;
+
 public interface IConnection
 {
-    public byte[] address { get; set; }
+    public byte[] Address { get; set; }
 }
 
 /// <summary>
@@ -10,19 +12,13 @@ public interface IConnection
 /// </summary>
 public class IPv4Connection : IConnection
 {
-    public byte Size = 5;
-    public byte[] address { get; set; }
+    public byte[] Address { get; set; }
 
-    public IPv4Connection(byte[] address) => 
-        this.address = address;
+    public IPv4Connection(byte[] address) =>
+        Address = address;
 
-    /*
-     * (1) Size
-     * (2) ipv4Address
-     * (5)
-     */
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int GetSize() => 5;
+    public static byte GetSize() => 4;
 }
 
 /// <summary>
@@ -30,18 +26,11 @@ public class IPv4Connection : IConnection
 /// </summary>
 public class IPv6Connection : IConnection
 {
-    public byte Size = 17;
-    public byte[] address { get; set; }
+    public byte[] Address { get; set; }
 
-    public IPv6Connection(byte[] address) => 
-        this.address = address;
+    public IPv6Connection(byte[] address) =>
+        Address = address;
 
-    /*
-     * (1) Size
-     * (2) ipv6Address
-     * (17)
-     */
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int GetSize() => 17;
+    public static int GetSize() => 16;
 }
-

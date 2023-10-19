@@ -25,14 +25,14 @@ internal class Program
 
         _ = Server.BeginListen(settings.Port);
 
-        for (;;)
+        while (true)
         {
             var input = Console.ReadLine();
             if (input is null) continue;
 
             input = input.Trim();
 
-            switch(input)
+            switch (input)
             {
                 case "q":
                 case "quit":
@@ -41,7 +41,6 @@ internal class Program
                     break;
             }
         }
-
     }
 
     [DoesNotReturn]

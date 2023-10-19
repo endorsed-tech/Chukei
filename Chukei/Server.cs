@@ -1,6 +1,5 @@
 ﻿using System.Net;
 using System.Net.Sockets;
-using System.Runtime.InteropServices;
 
 namespace Chukei;
 
@@ -18,7 +17,7 @@ public static class Server
             listener = new(port);
         }
 
-        for (;;)
+        while (true)
         {
 #if DEBUG
             Console.WriteLine("Awaiting incoming connection...");
@@ -30,8 +29,9 @@ public static class Server
             unsafe
             {
                 // If we received a buffer not sized as expected, ignore the connection
-                var ipv4Size = IPv4Connection.GetSize();
-                var ipv6Size = IPv6Connection.GetSize();
+                // We add one extra byte to the size to account for packet size as first byte
+                var ipv4Size = IPv4Connection.GetSize() + 1;
+                var ipv6Size = IPv6Connection.GetSize() + 1;
                 if (buffer.Length != ipv4Size || buffer.Length != ipv6Size) continue;
 
                 byte size = buffer[0];
@@ -50,17 +50,19 @@ public static class Server
                 if (size == ipv4Size)
                 {
                     connection = new IPv4Connection(buffer);
-                    
-                } else if (size == ipv6Size)
+
+                }
+                else if (size == ipv6Size)
                 {
                     connection = new IPv6Connection(buffer);
-                } else
+                }
+                else
                 {
                     Program.Exit("Unreachable state found! Contact administrator immediately!");
                     return;
                 }
 
-                listener.SendAsync(payload, payload.Length, new(new IPAddress(connection.address), port));
+                listener.SendAsync(payload, payload.Length, new(new IPAddress(connection.Address), port));
             }
         }
     }
