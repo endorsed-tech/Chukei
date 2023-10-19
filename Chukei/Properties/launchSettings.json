@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Chukei": {
+      "commandName": "Project",
+      "commandLineArgs": "settings.json"
+    }
+  }
+}
