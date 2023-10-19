@@ -1,10 +1,12 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Net;
+using System.Runtime.CompilerServices;
 
 namespace Chukei;
 
 public interface IConnection
 {
     public byte[] Address { get; set; }
+    public IPAddress AsIPAddress() => new(Address);
 }
 
 /// <summary>
@@ -33,5 +35,4 @@ public class IPv6Connection : IConnection
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static int GetSize() => 16;
-
 }

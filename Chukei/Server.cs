@@ -62,7 +62,7 @@ public static class Server
                     return;
                 }
 
-                listener.SendAsync(payload, payload.Length, new(new IPAddress(connection.Address), port));
+                listener.SendAsync(payload, payload.Length, new(connection.AsIPAddress(), port));
             }
         }
     }
