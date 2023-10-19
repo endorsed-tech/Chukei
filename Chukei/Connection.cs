@@ -13,10 +13,8 @@ public class IPv4Connection : IConnection
     public byte Size = 5;
     public byte[] address { get; set; }
 
-    public IPv4Connection(byte[] address)
-    {
+    public IPv4Connection(byte[] address) => 
         this.address = address;
-    }
 
     /*
      * (1) Size
@@ -35,10 +33,8 @@ public class IPv6Connection : IConnection
     public byte Size = 17;
     public byte[] address { get; set; }
 
-    public IPv6Connection(byte[] address)
-    {
+    public IPv6Connection(byte[] address) => 
         this.address = address;
-    }
 
     /*
      * (1) Size
