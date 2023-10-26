@@ -73,6 +73,7 @@ public static class Server
         lock(listenerLock)
         {
             listener.Close();
+            listener = null;
         }
     }
 }
